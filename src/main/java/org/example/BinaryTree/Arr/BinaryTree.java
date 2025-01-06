@@ -1,4 +1,4 @@
-package org.example;
+package org.example.BinaryTree.Arr;
 
 public class BinaryTree {
     public String[] arr;
