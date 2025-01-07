@@ -9,6 +9,7 @@ public class Main {
         Trie trie = new Trie();
         trie.insert("API");
         trie.insert("APIS");
+        System.out.println(trie.search("APIS"));
     }
 
 }
