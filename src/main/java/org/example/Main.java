@@ -1,32 +1,36 @@
 package org.example;
 
-import org.example.Graph.AdjacencyMatrix.Graph;
-import org.example.Graph.AdjacencyMatrix.GraphNode;
+import org.example.Graph.AdjacencyList.Graph;
+import org.example.Graph.AdjacencyList.GraphNode;
+import org.example.Graph.Weight.WeightedGraph;
+import org.example.Graph.Weight.WeightedNode;
 
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<GraphNode> nodeList = new ArrayList<>();
-        nodeList.add(new GraphNode("A", 0));
-        nodeList.add(new GraphNode("B", 1));
-        nodeList.add(new GraphNode("C", 2));
-        nodeList.add(new GraphNode("D", 3));
-        nodeList.add(new GraphNode("E", 4));
-        nodeList.add(new GraphNode("F", 5));
-        nodeList.add(new GraphNode("G", 6));
-        nodeList.add(new GraphNode("H", 7));
+        ArrayList<WeightedNode> nodeList = new ArrayList<>();
 
-        Graph g = new Graph(nodeList);
-        g.addDirectedEdge(0, 2);
-        g.addDirectedEdge(2, 4);
-        g.addDirectedEdge(4, 7);
-        g.addDirectedEdge(4, 5);
-        g.addDirectedEdge(5, 6);
-        g.addDirectedEdge(1, 2);
-        g.addDirectedEdge(1, 3);
-        g.addDirectedEdge(3, 5);
+        nodeList.add(new WeightedNode("A", 1));
+        nodeList.add(new WeightedNode("B", 2));
+        nodeList.add(new WeightedNode("C", 3));
+        nodeList.add(new WeightedNode("D", 4));
+        nodeList.add(new WeightedNode("E", 5));
+        nodeList.add(new WeightedNode("F", 6));
+        nodeList.add(new WeightedNode("G", 7));
 
-        g.topologicalSort();
+        WeightedGraph newGraph = new WeightedGraph(nodeList);
+
+        newGraph.addWeightedEdge(0, 1, 2);
+        newGraph.addWeightedEdge(0, 2, 5);
+        newGraph.addWeightedEdge(1, 2, 6);
+        newGraph.addWeightedEdge(1, 3, 1);
+        newGraph.addWeightedEdge(1, 4, 3);
+        newGraph.addWeightedEdge(2, 5, 8);
+        newGraph.addWeightedEdge(2, 4, 4);
+        newGraph.addWeightedEdge(4, 6, 9);
+        newGraph.addWeightedEdge(5, 6, 7);
+        System.out.println("Printing dijkstra from source: A");
+        newGraph.dijkstra(nodeList.get(0));
     }
 }
