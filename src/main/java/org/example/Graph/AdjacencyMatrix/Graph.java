@@ -94,4 +94,27 @@ public class Graph {
             }
         }
     }
+
+    public static void printPath(GraphNode node) {
+        if(node.parent != null) {
+            printPath(node.parent);
+        }
+        System.out.print(node.name + " ");
+    }
+
+    public void bfsForSSSPP(GraphNode node) {
+        LinkedList<GraphNode> queue = new LinkedList<>();
+        queue.add(node);
+        while(!queue.isEmpty()) {
+            GraphNode currentNode = queue.remove(0);
+            currentNode.isVisited = true;
+            for(GraphNode neighbor : getNeighbors(currentNode)) {
+                if(!neighbor.isVisited) {
+                    queue.add(neighbor);
+                    neighbor.isVisited = true;
+                    neighbor.parent = currentNode;
+                }
+            }
+        }
+    }
 }
