@@ -37,6 +37,29 @@ public class WeightedGraph {
 
     }
 
+    public void bellmanFord(WeightedNode sourceNode) {
+        sourceNode.distance = 0;
+        for (int i = 1; i < nodeList.size(); i++) {
+            for (WeightedNode currentNode : nodeList) {
+                for (WeightedNode neighbor : currentNode.neighbors) {
+                    if (neighbor.distance > currentNode.distance + currentNode.weightMap.get(neighbor)) {
+                        neighbor.distance = currentNode.distance + currentNode.weightMap.get(neighbor);
+                        neighbor.parent = currentNode;
+                    }
+                }
+            }
+        }
+
+        System.out.println("Checking for negative cycle...");
+        for (WeightedNode currentNode : nodeList) {
+            for (WeightedNode neighbor : currentNode.neighbors) {
+                if (neighbor.distance > currentNode.distance + currentNode.weightMap.get(neighbor)) {
+                    System.out.println("Negative cycle found");
+                }
+            }
+        }
+    }
+
     private void pathPrint(WeightedNode nodeToCheck) {
         if(nodeToCheck.parent != null) {
             pathPrint(nodeToCheck.parent);
